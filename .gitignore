@@ -4,3 +4,10 @@
 # React Router
 /.react-router/
 /build/
+
+# Workspace
+/.vscode/
+/.idea/
+
+# Logs
+/logs
