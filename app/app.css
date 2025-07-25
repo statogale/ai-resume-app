@@ -92,6 +92,10 @@ form {
     @apply flex flex-row gap-2 justify-between min-h-[110px] max-sm:flex-col items-center max-md:justify-center max-md:items-center;
   }
 
+  .resume-card-image {
+    @apply w-full h-[350px] max-sm:h-[200px] object-cover object-top;
+  }
+
   .feedback-section {
     @apply flex flex-col gap-8 w-1/2 px-8 max-lg:w-full py-6;
   }
