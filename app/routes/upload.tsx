@@ -45,18 +45,45 @@ const Upload = () => {
         await kv.set(`resume:${uuid}`, JSON.stringify(data));
 
         setStatusText('Analyzing...');
+        let feedback;
+        try {
+            feedback = await ai.feedback(
+                uploadedFile.path,
+                prepareInstructions({ jobTitle, jobDescription, AIResponseFormat })
+            );
+        } catch (err: any) {
+            console.error('AI feedback error', err);
+            setStatusText(err.error?.message ?? 'Error: Failed to analyze resume');
+            return;
+        }
 
-        const feedback = await ai.feedback(
-            uploadedFile.path,
-            prepareInstructions({ jobTitle, jobDescription, AIResponseFormat })
-        )
-        if (!feedback) return setStatusText('Error: Failed to analyze resume');
+        if (!feedback) {
+            setStatusText('Error: Failed to analyze resume');
+            return;
+        }
 
-        const feedbackText = typeof feedback.message.content === 'string'
+        // Extract raw text
+        const rawContent = typeof feedback.message.content === 'string'
             ? feedback.message.content
             : feedback.message.content[0].text;
 
-        data.feedback = JSON.parse(feedbackText);
+        // Remove code fences and trim
+        const cleaned = rawContent
+            .replace(/^```json?\s*/, '')
+            .replace(/```$/, '')
+            .trim();
+
+        // Safe JSON parse
+        let parsedFeedback;
+        try {
+            parsedFeedback = JSON.parse(cleaned);
+        } catch (err) {
+            console.error('Failed to parse feedback JSON', err, cleaned);
+            setStatusText('Error: Invalid feedback format');
+            return;
+        }
+
+        data.feedback = parsedFeedback;
         await kv.set(`resume:${uuid}`, JSON.stringify(data));
         setStatusText('Analysis complete, redirecting...');
         console.log(data);
@@ -66,17 +93,22 @@ const Upload = () => {
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const form = e.currentTarget.closest('form');
-        if(!form) return;
+        if (!form || !file) return;
         const formData = new FormData(form);
-
         const companyName = formData.get('company-name') as string;
         const jobTitle = formData.get('job-title') as string;
         const jobDescription = formData.get('job-description') as string;
 
-        if(!file) return;
-
-        await handleAnalyze({ companyName, jobTitle, jobDescription, file });
-    }
+        setIsProcessing(true);
+        try {
+            await handleAnalyze({ companyName, jobTitle, jobDescription, file });
+        } catch (err: any) {
+            console.error('Submission error', err);
+            setStatusText(err.error?.message ?? 'Error: Failed to analyze resume');
+        } finally {
+            setIsProcessing(false);
+        }
+    };
 
     return (
         <main className="bg-[url('/images/bg-main.svg')] bg-cover">
@@ -87,6 +119,21 @@ const Upload = () => {
                     <h1>Upload Your Resume</h1>
                     <h2>Get AI-Powered Feedback and Suggestions</h2>
                     <h3>Enhance your job application with personalized insights.</h3>
+                    {/* display statusText if present */}
+                    {!isProcessing && statusText && (
+                        <div className="fixed inset-0 flex items-center justify-center bg-transparent backdrop-blur-sm z-50">
+                            <div className="bg-white/20 backdrop-blur-lg p-6 rounded shadow-lg max-w-sm w-full">
+                                <p className="text-gray-800">{statusText}</p>
+                                <button
+                                    className="mt-4 px-4 py-2 bg-blue-600 text-white rounded"
+                                    onClick={() => setStatusText('')}
+                                >
+                                    Close
+                                </button>
+                            </div>
+                        </div>
+                    )}
+
                     {isProcessing ? (
                         <>
                             <h2>{statusText}</h2>

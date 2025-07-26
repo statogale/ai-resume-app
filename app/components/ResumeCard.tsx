@@ -38,7 +38,7 @@ export const ResumeCard = ({ resume: { id, companyName, jobTitle, feedback, imag
                         </h2>
                     )}
                 </div>
-                <div className="flex-shrink-0 ml-4">
+                <div className="flex-shrink-0">
                     <ScoreCircle score={feedback.overallScore} />
                 </div>
             </div>
