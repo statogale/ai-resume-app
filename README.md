@@ -95,6 +95,8 @@ Open [http://localhost:5173](http://localhost:5173) in your browser.
 ### Run the live app at Puter.com (Recommended)
 You can also try the live app at [Statogale Resume Buddy](https://puter.com/app/statogale-resume-buddy).
 
+Puter automatically provisions a temporary account for initial access to the app. However, to gain greater control and personalization, it is recommended that you register your own account using your email address. Additionally, you can upgrade your personal account to access enhanced computing resources, increased storage, and faster models.
+
 ### App Video
 [Statogale-Resume-Buddy App video](https://github.com/user-attachments/assets/d3b4e4ce-cff9-47c8-a416-b427936d2fd1)
 
