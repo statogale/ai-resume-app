@@ -1,4 +1,4 @@
-import {useCallback} from 'react'
+import {useCallback, useState} from 'react'
 import {useDropzone} from 'react-dropzone'
 import { formatSize } from '~/lib/utils'
 
@@ -7,29 +7,29 @@ interface FileUploaderProps {
 }
 
 export const FileUploader = ({ onFileSelect }: FileUploaderProps) => {
-    const onDrop = useCallback((acceptedFiles: File[]) => {
-        const file = acceptedFiles[0] || null;
+    const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
+    const onDrop = useCallback((files: File[]) => {
+        const file = files[0] || null;
+        setSelectedFile(file);
         onFileSelect?.(file);
     }, [onFileSelect]);
 
-    const maxFileSize = 20 * 1024 * 1024; // 20MB in bytes
+    const maxFileSize = 20 * 1024 * 1024;
 
-    const {getRootProps, getInputProps, isDragActive, acceptedFiles} = useDropzone({
+    const { getRootProps, getInputProps } = useDropzone({
         onDrop,
         multiple: false,
-        accept: { 'application/pdf': ['.pdf']},
+        accept: { 'application/pdf': ['.pdf'] },
         maxSize: maxFileSize,
-    })
+    });
 
-    const file = acceptedFiles[0] || null;
-
-
+    const file = selectedFile;
 
     return (
         <div className="w-full gradient-border">
             <div {...getRootProps()}>
-                <input {...getInputProps()} />
+                <input {...getInputProps()} key={file ? file.name : 'empty'} />
 
                 <div className="space-y-4 cursor-pointer">
                     {file ? (
@@ -45,9 +45,14 @@ export const FileUploader = ({ onFileSelect }: FileUploaderProps) => {
                                     </p>
                                 </div>
                             </div>
-                            <button className="p-2 cursor-pointer" onClick={(e) => {
-                                onFileSelect?.(null)
-                            }}>
+                            <button
+                                className="p-2 cursor-pointer"
+                                onClick={e => {
+                                    e.stopPropagation()
+                                    setSelectedFile(null)
+                                    onFileSelect?.(null)
+                                }}
+                            >
                                 <img src="/icons/cross.svg" alt="remove" className="w-4 h-4" />
                             </button>
                         </div>

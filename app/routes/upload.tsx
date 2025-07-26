@@ -5,7 +5,7 @@ import {usePuterStore} from "~/lib/puter";
 import {useNavigate} from "react-router";
 import {convertPdfToImage} from "~/lib/pdf2img";
 import {generateUUID} from "~/lib/utils";
-import {prepareInstructions} from "../../constants";
+import {prepareInstructions, AIResponseFormat} from "../../constants";
 
 const Upload = () => {
     const { auth, isLoading, fs, ai, kv } = usePuterStore();
@@ -22,7 +22,7 @@ const Upload = () => {
         setIsProcessing(true);
 
         setStatusText('Uploading the file...');
-        const uploadedFile = await fs.upload([file]);
+        const [uploadedFile] = await Promise.all([fs.upload([file])]);
         if(!uploadedFile) return setStatusText('Error: Failed to upload file');
 
         setStatusText('Converting to image...');
@@ -48,7 +48,7 @@ const Upload = () => {
 
         const feedback = await ai.feedback(
             uploadedFile.path,
-            prepareInstructions({ jobTitle, jobDescription })
+            prepareInstructions({ jobTitle, jobDescription, AIResponseFormat })
         )
         if (!feedback) return setStatusText('Error: Failed to analyze resume');
 
@@ -63,7 +63,7 @@ const Upload = () => {
         navigate(`/resume/${uuid}`);
     }
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const form = e.currentTarget.closest('form');
         if(!form) return;
@@ -75,7 +75,7 @@ const Upload = () => {
 
         if(!file) return;
 
-        handleAnalyze({ companyName, jobTitle, jobDescription, file });
+        await handleAnalyze({ companyName, jobTitle, jobDescription, file });
     }
 
     return (
@@ -90,12 +90,11 @@ const Upload = () => {
                     {isProcessing ? (
                         <>
                             <h2>{statusText}</h2>
-                            <img src="/images/resume-scan.gif" className="w-full" />
+                            <img src="/images/resume-scan.gif" className="w-full" alt="Animated illustration of the resume being processed" />
                         </>
                     ) : (
                         <>
-                            <h1>Upload your resume to get started.</h1>
-                            <h2>Our AI will analyze your resume and provide an ATS score and feedback.</h2>
+                            <h3>Our AI will analyze your resume and provide an ATS score and feedback.</h3>
                             <h3>Supported formats: PDF</h3>
                         </>
 
@@ -111,8 +110,8 @@ const Upload = () => {
                                 <input type="text" name="job-title" placeholder="Job Title" />
                             </div>
                             <div className="form-div">
-                                <label htmlFor="job-description">Job Desciption</label>
-                                <textarea rows={5} name="job-description" placeholder="Job Desciption" />
+                                <label htmlFor="job-description">Job Description</label>
+                                <textarea rows={5} name="job-description" placeholder="Job Description" />
                             </div>
                             <div className="form-div">
                                 <label htmlFor="uploader">Upload Resume</label>

@@ -245,7 +245,7 @@ export const usePuterStore = create<PuterStore>((set, get) => {
         const puter = getPuter();
         if (puter) {
             set({ puterReady: true });
-            checkAuthStatus();
+            void checkAuthStatus().catch(console.error);
             return;
         }
 
@@ -253,7 +253,7 @@ export const usePuterStore = create<PuterStore>((set, get) => {
             if (getPuter()) {
                 clearInterval(interval);
                 set({ puterReady: true });
-                checkAuthStatus();
+                void checkAuthStatus().catch(console.error);
             }
         }, 100);
 
@@ -334,6 +334,21 @@ export const usePuterStore = create<PuterStore>((set, get) => {
             return;
         }
 
+        const DEFAULT_MODEL = "claude-sonnet-4";
+        let selectedModel = DEFAULT_MODEL;
+
+        // If the API provides a listModels() helper, use it to pick a valid model
+        if (typeof puter.ai.listModels === "function") {
+            try {
+                const available = await puter.ai.listModels();
+                if (!available.includes(DEFAULT_MODEL)) {
+                    selectedModel = available[0] ?? DEFAULT_MODEL;
+                }
+            } catch {
+                // ignore errors and keep DEFAULT_MODEL
+            }
+        }
+
         return puter.ai.chat(
             [
                 {
@@ -350,7 +365,7 @@ export const usePuterStore = create<PuterStore>((set, get) => {
                     ],
                 },
             ],
-            { model: "claude-sonnet-4" }
+            { model: selectedModel }
         ) as Promise<AIResponse | undefined>;
     };
 

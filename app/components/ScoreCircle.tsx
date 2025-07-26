@@ -1,4 +1,4 @@
-const ScoreCircle = ({ score = 75 }: { score: number }) => {
+export const ScoreCircle = ({ score = 75 }: { score: number }) => {
     const radius = 40;
     const stroke = 8;
     const normalizedRadius = radius - stroke / 2;
@@ -50,5 +50,3 @@ const ScoreCircle = ({ score = 75 }: { score: number }) => {
         </div>
     );
 };
-
-export default ScoreCircle;
