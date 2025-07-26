@@ -1,87 +1,138 @@
-# Welcome to React Router!
+# Resume Buddy: AI-Powered Resume Analyzer
 
-A modern, production-ready template for building full-stack React applications using React Router.
+<div align="center">
+  <img src="public/images/Statogale-Resume-Buddy-Review.jpeg" alt="Resume Buddy Banner" width="600">
+  <br />
+  <div>
+    <img src="https://img.shields.io/badge/React-4c84f3?style=for-the-badge&logo=react&logoColor=white">
+    <img src="https://img.shields.io/badge/-Tailwind-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" />
+    <img src="https://img.shields.io/badge/-TypeScript-black?style=for-the-badge&logoColor=white&logo=typescript&color=3178C6" alt="TypeScript" />
+    <img src="https://img.shields.io/badge/Puter.js-181758?style=for-the-badge&logoColor=white">
+    <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white">
+  </div>
+  <h3 align="center">Resume Buddy: AI-Powered Resume Analyzer</h3>
+  <div align="center">
+    Build, analyze, and optimize your resume with smart AI feedback and seamless cloud storage.
+  </div>
+</div>
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
+---
 
-## Features
+## 📋 Table of Contents
 
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+1. ✨ [Introduction](#introduction)
+2. ⚙️ [Tech Stack](#tech-stack)
+3. 🔋 [Features](#features)
+4. 🤸 [Quick Start](#quick-start)
+5. 🔗 [Assets](#assets)
+6. 👥 [Contributing](#contributing)
+7. 💬 [Feedback & Support](#feedback)
+8. 📝 [License](#license)
 
-## Getting Started
+---
+
+## ✨ Introduction
+
+**Resume Buddy** is a modern web app that helps you create, upload, and analyze your resume using AI. Get instant ATS scores, actionable feedback, and store all your resumes securely in the cloud. Built with React, TypeScript, Puter.js, and Tailwind CSS, Resume Buddy offers a clean, responsive UI and a seamless user experience.
+
+---
+
+## ⚙️ Tech Stack
+
+- **React**: Component-based UI library for fast, interactive web apps.
+- **React Router v7**: Powerful routing for nested routes, code splitting, and SSR.
+- **TypeScript**: Static typing for safer, scalable code.
+- **Tailwind CSS**: Utility-first CSS for rapid, custom design.
+- **Puter.js**: Serverless auth, storage, and AI features—no backend required.
+- **Vite**: Lightning-fast build tool and dev server.
+- **Zustand**: Minimal, performant state management for React.
+
+---
+
+## 🔋 Features
+
+- **Easy Authentication**: Secure, in-browser login with Puter.js.
+- **Resume Upload & Storage**: Upload and manage multiple resumes in your personal cloud.
+- **AI Resume Analysis**: Get ATS scores and personalized feedback for each resume.
+- **Reusable UI Components**: Clean, modular design for maintainability.
+- **Responsive Design**: Works seamlessly across devices.
+- **Modern UI/UX**: Built with Tailwind CSS and shadcn/ui for a sleek look.
+- **PDF to Image Conversion**: Preview your resume instantly.
+- **Job Matching**: Match resumes to job listings with smart AI evaluation.
+
+---
+
+## 🤸 Quick Start
+
+Get Resume Buddy running locally in minutes!
+
+### Prerequisites
+
+- [Git](https://git-scm.com/)
+- [Node.js](https://nodejs.org/en)
+- [npm](https://www.npmjs.com/)
 
 ### Installation
 
-Install the dependencies:
+Clone the repository and install dependencies:
 
 ```bash
+git clone https://github.com/D0nG4667/resume-buddy.git
+cd resume-buddy
 npm install
 ```
 
-### Development
-
-Start the development server with HMR:
+### Running the App
 
 ```bash
 npm run dev
 ```
 
-Your application will be available at `http://localhost:5173`.
-
-## Building for Production
-
-Create a production build:
-
-```bash
-npm run build
-```
-
-## Deployment
-
-### Docker Deployment
-
-To build and run using Docker:
-
-```bash
-docker build -t my-app .
-
-# Run the container
-docker run -p 3000:3000 my-app
-```
-
-The containerized application can be deployed to any platform that supports Docker, including:
-
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
-
-### DIY Deployment
-
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-```
-├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
-```
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
+Open [http://localhost:5173](http://localhost:5173) in your browser.
 
 ---
 
-Built with ❤️ using React Router.
+### Run the live app at Puter.com (Recommended)
+You can also try the live app at [Statogale Resume Buddy](https://puter.com/app/statogale-resume-buddy).
+
+## 🔗 Assets
+
+All images, icons, and assets are located in the `public/` directory. Additional resources and video kits can be found at [Resume Buddy Kit](https://jsm.dev/resumind-kit).
+
+---
+
+## 👥 Contributing
+
+We welcome contributions! To get started:
+
+1. Fork the repo and clone it locally.
+2. Create a new branch for your feature or bugfix.
+3. Make your changes and commit with clear messages.
+4. Submit a pull request and describe your changes.
+
+---
+
+## 💬 Feedback & Support
+Feedback, suggestions, and contributions are welcome! Feel free to open an issue for bug reports, feature requests, or general inquiries. For additional support or questions, you can connect with me on [LinkedIn](https://www.linkedin.com/in/dr-gabriel-okundaye).
+
+## 👥 Authors <a name="authors"></a>
+
+🕺🏻**Gabriel Okundaye**
+
+- GitHub: [GitHub Profile](https://github.com/D0nG4667)
+
+- LinkedIn: [LinkedIn Profile](https://www.linkedin.com/in/dr-gabriel-okundaye)
+
+
+## ⭐️ Show your support <a name="support"></a>
+
+If you like this project kindly show some love, give it a 🌟 **STAR** 🌟. Thank you!
+
+
+## 📝 License
+
+This project is [MIT](LICENSE) licensed.
+
+---
+
+<p align="right">(<a href="#table">back to top</a>)</p>

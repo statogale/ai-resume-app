@@ -9,6 +9,9 @@ export const NavBar = () => {
             <Link to="/upload" className="primary-button w-fit">
                 Upload Resume
             </Link>
+            <Link to="/profile" className="text-2xl font-bold text-gradient">
+                Profile
+            </Link>
         </nav>
     );
 };

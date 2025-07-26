@@ -4,7 +4,6 @@ import {ResumeCard} from "~/components/ResumeCard";
 import {usePuterStore} from "~/lib/puter";
 import {useEffect, useState} from "react";
 import {Link,useNavigate} from "react-router";
-import {LogOutNav} from "~/components/LogOutNav";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -41,7 +40,6 @@ export default function Home() {
     }, []);
 
     return <main className="bg-[url('/images/bg-main.svg')] bg-cover">
-    <LogOutNav />
     <NavBar />
 
     <section className="main-section">
