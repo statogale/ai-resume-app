@@ -95,6 +95,9 @@ Open [http://localhost:5173](http://localhost:5173) in your browser.
 ### Run the live app at Puter.com (Recommended)
 You can also try the live app at [Statogale Resume Buddy](https://puter.com/app/statogale-resume-buddy).
 
+### App Video
+https://github.com/statogale/ai-resume-app/blob/6bd1764fef7f1eb0b4d0335b8419410b3542b042/public/videos/Statogale-Resume-Buddy.webm
+
 ## 🔗 Assets
 
 All images, icons, and assets are located in the `public/` directory. Additional resources and video kits can be found at [Resume Buddy Kit](https://jsm.dev/resumind-kit).
